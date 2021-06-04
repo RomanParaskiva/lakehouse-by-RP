@@ -1,0 +1,110 @@
+.about {
+    position: relative;
+    overflow-x: hidden;
+}
+
+
+.about__bckg-img {
+    width: 50%;
+    height: 100%;
+    max-height: 450px;
+    position: absolute;
+    bottom: 0%;
+    right: -100px;
+    background-image: url(/assets/img/about-background.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom right;
+}
+
+.about p {
+    font-family: 'Karla',sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 50px;
+}
+
+.about h3 {
+    font-weight: 700;
+    font-size: 24px;
+    text-align: center;
+    margin: 0;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.about .checkmark-text {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    line-height: 40px;
+    padding: 0 130px;
+    margin-bottom: 50px;
+}
+
+.about .checkmark-text:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+.about .checkmark-text img {
+    width: 31px;
+    margin-right: 30px;
+}
+
+.about__subtext {
+    display: block;
+    font-size: 18px;
+    line-height: 21px;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 1260px) {
+    .about p{
+        font-size: 24px;
+    }
+    .about .checkmark-text{
+        padding: 0 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about{
+        background: linear-gradient(180deg, rgba(101, 177, 239, 0.19) 0%, rgba(255, 255, 255, 0) 100%);
+        overflow: hidden;
+    }
+    .about p {
+        font-size: 16px;
+        line-height: 25px;
+        /* or 142% */
+
+        letter-spacing: 0.07em;
+
+        color: rgba(0, 0, 0, 0.92);
+    }
+
+    .about .checkmark-text {
+        padding: 0;
+        font-size: 14px;
+        line-height: 17px;
+        align-items: flex-start;
+    }
+
+    .about__subtext {
+        font-size: 14px;
+    }
+
+    .about h3 {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .about .checkmark-text img {
+        width: 16px;
+        margin-right: 15px;
+    }
+
+    .about__bckg-img{
+        width: 80%;
+        right: -70px;
+    }
+}

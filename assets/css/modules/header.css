@@ -1,0 +1,15 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+}
+
+header .header__menu-btn{
+    padding: 25px 30px;
+}
+
+header .header__menu-btn.scroll{
+    background-color: rgba(0, 0, 0, 0.24)
+}
