@@ -1,3 +1,115 @@
+
+jQuery(document).ready(function($){   
+    $('.hero__slider-wrapper').owlCarousel({
+        nav: true,
+        lazyLoad: true,
+        items: 1,
+        loop: true,
+        smartSpeed: 200,
+        animateOut: 'fadeOut',
+        mouseDrag: true,
+        touchDrag: false,
+        pullDrag: true
+    });
+
+    $(function () {
+        $('.arrow-down').on('click', function (e) {
+            $('html,body').stop().animate({ scrollTop: $('#about').offset().top }, 1000);
+            e.preventDefault();
+        });
+
+    });
+
+    function setDots() {
+        $(".news__slider-wrapper .owl-dots").removeClass('disabled');
+    }
+
+    $('.news__slider-wrapper').owlCarousel({
+        loop: true,
+        items: 1,
+        onInitialized: setDots,
+        onChanged: setDots,
+        dots: true
+    })
+
+    const roomsContainer = $('.rooms__container ')
+
+    roomsContainer.owlCarousel({
+        loop: true,
+        margin: 10,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            960: {
+                items: 3
+            },
+            1200: {
+                items: 3
+            }
+        }
+    })
+    roomsContainer.on('mousewheel', '.owl-stage', function (e) {
+        if (e.deltaY > 0) {
+            roomsContainer.trigger('next.owl');
+        } else {
+            roomsContainer.trigger('prev.owl');
+        }
+        e.preventDefault();
+    });
+
+    const owl = $('.modal__body-slider')
+
+    owl.owlCarousel({
+        loop: true,
+        items: 1,
+        dots: false,
+        nav: false,
+        navText: ["", ""],
+        lazyLoad: true,
+        smartSpeed: 200,
+        animateOut: 'fadeOut',
+        mouseDrag: true,
+        touchDrag: true,
+        pullDrag: true
+    });
+    // Go to the next item
+    $('.modal__nav-next').on('click', function () {
+        owl.trigger('next.owl.carousel');
+    })
+    // Go to the previous item
+    $('.modal__nav-prev').on('click', function () {
+        // With optional speed parameter
+        // Parameters has to be in square bracket '[]'
+        owl.trigger('prev.owl.carousel', [300]);
+    })
+
+    $('input[name="daterange"]').daterangepicker({
+        locale: {
+            format: 'DD-MM-YY',
+            "firstDay": 1
+        },
+        "startDate": moment(),
+        "endDate": moment().add(7, 'day'),
+        "minDate": moment(),
+        "maxDate": moment().add(3, 'month'),
+        "parentEl": ".date-input__wrapper",
+        "drops": "auto",
+        "alwaysShowCalendars": true,
+        "autoUpdateInput": true,
+        "autoApply": true,
+        "opens": "center"
+    }, function (start, end) {
+        modalData['start'] = start.format('DD-MM-YYYY')
+        modalData['end'] = end.format('DD-MM-YYYY')
+    });
+
+    $('input[name="daterange"]').click();
+
+});
 "use strict"
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -52,6 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 showUncheckedImg(e.target.name, document.querySelector('#sidebar-menu'))
             })
         })
+
+        
     } catch (e) { }
 
 
@@ -124,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     modalPeopleInputs.forEach(item => {
                         modalData[item.querySelector('input[type="number"]').name] = item.querySelector('input').value
                     })
-                    modalData['range'] = $('.drp-selected').html()
+                    modalData['range'] = document.querySelector('.drp-selected').innerHTML
                 }
                 modalBodys.map(item => {
                     item.dataset.step == id ? item.classList.add('active') : item.classList.remove('active')
@@ -152,31 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modalData[textarea.name] = textarea.value
 
                 console.log(modalData)
-        })
-
-        $('input[name="daterange"]').daterangepicker({
-            locale: {
-                format: 'DD-MM-YY',
-                "firstDay": 1
-            },
-            "startDate": moment(),
-            "endDate": moment().add(7, 'day'),
-            "minDate": moment(),
-            "maxDate": moment().add(3, 'month'),
-            "parentEl": ".date-input__wrapper",
-            "drops": "auto",
-            "alwaysShowCalendars": true,
-            "autoUpdateInput": true,
-            "autoApply": true,
-            "opens": "center"
-        }, function (start, end) {
-            modalData['start'] = start.format('DD-MM-YYYY')
-            modalData['end'] = end.format('DD-MM-YYYY')
-        });
-
-        $('input[name="daterange"]').click();
-
-       
+        })      
 
 
     }
@@ -185,6 +275,14 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         headerMenuBtn.addEventListener('click', e => {
             sidebarMenu.classList.add('show')
+        })
+
+        const menuItems = [...sidebarMenu.querySelectorAll('.menu-item ')]
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', e => {
+                sidebarMenu.classList.remove('show')
+            })
         })
 
         closeMenuBtn.addEventListener('click', e => {
@@ -202,93 +300,3 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) { }
 })
 
-$(document).ready(function () {
-    console.log()
-    $('.hero__slider-wrapper').owlCarousel({
-        nav: true,
-        lazyLoad: true,
-        items: 1,
-        loop: true,
-        smartSpeed: 200,
-        animateOut: 'fadeOut',
-        mouseDrag: true,
-        touchDrag: false,
-        pullDrag: true
-    });
-
-    $(function () {
-
-        $('.arrow-down').on('click', function (e) {
-            $('html,body').stop().animate({ scrollTop: $('#about').offset().top }, 1000);
-            e.preventDefault();
-        });
-
-    });
-
-    function setDots() {
-        $(".news__slider-wrapper .owl-dots").removeClass('disabled');
-    }
-
-    $('.news__slider-wrapper').owlCarousel({
-        loop: true,
-        items: 1,
-        onInitialized: setDots,
-        onChanged: setDots,
-        dots: true
-    })
-
-    const roomsContainer = $('.rooms__container ')
-
-    roomsContainer.owlCarousel({
-        loop: true,
-        margin: 10,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 2
-            },
-            960: {
-                items: 3
-            },
-            1200: {
-                items: 3
-            }
-        }
-    })
-    roomsContainer.on('mousewheel', '.owl-stage', function (e) {
-        if (e.deltaY > 0) {
-            roomsContainer.trigger('next.owl');
-        } else {
-            roomsContainer.trigger('prev.owl');
-        }
-        e.preventDefault();
-    });
-
-    var owl = $('.modal__body-slider');
-    owl.owlCarousel({
-        loop: true,
-        items: 1,
-        dots: false,
-        nav: false,
-        navText: ["", ""],
-        lazyLoad: true,
-        smartSpeed: 200,
-        animateOut: 'fadeOut',
-        mouseDrag: true,
-        touchDrag: true,
-        pullDrag: true
-    });
-    // Go to the next item
-    $('.modal__nav-next').on('click', function () {
-        owl.trigger('next.owl.carousel');
-    })
-    // Go to the previous item
-    $('.modal__nav-prev').on('click', function () {
-        // With optional speed parameter
-        // Parameters has to be in square bracket '[]'
-        owl.trigger('prev.owl.carousel', [300]);
-    })
-
-});
