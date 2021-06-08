@@ -43,7 +43,7 @@ function init_scripts(){
     wp_enqueue_style( 'style', get_stylesheet_uri() );
    
     wp_enqueue_script( 'jquery',  "https://code.jquery.com/jquery-3.6.0.min.js" , [], $version, true);
-    wp_enqueue_script( 'owl-carousel',  get_template_directory_uri() ."/assets/js/owl.carousel.min.js" , [], '', true);
+    wp_enqueue_script( 'owl-carousel',  "https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" , [], '', true);
     wp_enqueue_script( 'fslightbox',  get_template_directory_uri() ."/assets/js/fslightbox.js" , [], $version, true);
     wp_enqueue_script( 'moment',  get_template_directory_uri() ."/assets/js/moment.min.js" , [], $version, true);
     wp_enqueue_script( 'daterangepicker',  get_template_directory_uri() ."/assets/js/daterangepicker.js" , [], $version, true);

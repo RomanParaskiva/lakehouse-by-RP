@@ -47,7 +47,14 @@ Container::make( 'post_meta', __( 'Опции страницы' ) )
  ] )
  ->add_tab('Номера', [
      Field::make_text('rooms_title', 'Заголовок')->set_width(50),
-    Field::make_rich_text('rooms_description', 'Описание')
+    Field::make_rich_text('rooms_description', 'Описание'),
+    Field::make_association('rooms', 'Номера')
+    ->set_types([
+        [
+            'type' => 'post',
+            'post_type' => 'room'
+        ]
+    ])
 ] )
 ->add_tab('Услуги', [
     Field::make_text('services_title', 'Заголовок')->set_width(50),
@@ -76,6 +83,7 @@ Container::make( 'post_meta', __( 'Опции номера' ) )
 ->add_tab('Опции номера', [
     Field::make_text('room_price', 'Стоимость')->set_required(true)->set_width(50)->set_attribute('type', 'number'),
     Field::make_media_gallery('room_gallery', 'Изображения номера')->set_width(50)->set_required(true),
+    Field::make_text('room_person', 'Количество человек')->set_attribute('type', 'number')->set_required(true),
     Field::make_rich_text('room_description', 'Описание комнаты')
 ]);
 

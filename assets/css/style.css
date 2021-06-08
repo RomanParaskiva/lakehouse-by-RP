@@ -1,0 +1,78 @@
+@import '/assets/css/modules/hero.css';
+@import '/assets/css/modules/header.css';
+@import '/assets/css/owl.carousel.min.css';
+@import '/assets/css/modules/about.css';
+@import '/assets/css/modules/news.css';
+@import '/assets/css/modules/rooms.css';
+@import '/assets/css/modules/services.css';
+@import '/assets/css/modules/group.css';
+@import '/assets/css/modules/gallery.css';
+@import '/assets/css/modules/contacts.css';
+@import '/assets/css/modules/sidebar-menu.css';
+@import '/assets/css/karla/karla.css';
+@import '/assets/css/modules/modal.css';
+
+body {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    font-family: 'Karla', sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+* {
+    outline: none;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Rubik', sans-serif;
+}
+
+h2 {
+    font-size: 36px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+section:not(.hero) {
+    padding: 50px 1.5rem;
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 1260px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1100px) {
+    h2 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 18px;
+        line-height: 19px;
+        /* or 136% */
+
+        text-align: center;
+        letter-spacing: 0.02em;
+    }
+
+    section:not(.hero){
+        padding: 20px;
+    }
+}

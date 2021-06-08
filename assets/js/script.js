@@ -37,6 +37,9 @@ jQuery(document).ready(function($){
     roomsContainer.owlCarousel({
         loop: true,
         margin: 10,
+        dots: true,
+        onInitialized: setDots,
+        onChanged: setDots,
         responsive: {
             0: {
                 items: 1
@@ -66,7 +69,7 @@ jQuery(document).ready(function($){
     owl.owlCarousel({
         loop: true,
         items: 1,
-        dots: false,
+        dots: true,
         nav: false,
         navText: ["", ""],
         lazyLoad: true,
@@ -118,17 +121,45 @@ document.addEventListener('DOMContentLoaded', () => {
         closeMenuBtn = document.querySelector('.close-menu-btn'),
         requestBtns = [...document.querySelectorAll('[data-target="booking"')],
         modal = document.querySelector('#modal'),
+        modalSidebarItem = [...modal.querySelectorAll('.modal__sidebar-room')],
         modalClose = document.querySelector('.modal__close'),
         sideBarChkbox = [...document.querySelectorAll('.checkbox-group')],
         modalPeopleInputs = [...modal.querySelectorAll('.modal__body-people-item')]
+
+        const openModal = (el) => {
+            const modal = document.querySelector('#modal'),
+                modalBodys = [...modal.querySelectorAll('.modal__body')]
+                if(el.dataset.id){
+                    modalBodys.forEach(item => {
+                        if(el.dataset.id == item.id){
+                            item.classList.add('active')
+                        } else {
+                            item.classList.remove('active')
+                        }
+                    })
+                } else {
+                    modalBodys.forEach(item => item.classList.remove('active'))
+                    modalBodys[0].classList.add('active')
+                }
+                
+                modal.style.display = 'flex'
+                document.body.style.overflowY = 'hidden'
+                handleModal(1)
+        }
 
     try {
         requestBtns.forEach(item => {
             item.addEventListener('click', e => {
                 e.preventDefault()
-                modal.style.display = 'flex'
-                document.body.style.overflowY = 'hidden'
-                handleModal()
+                openModal(e.target)
+            })
+        })
+
+        modalSidebarItem.forEach(item => {
+            item.addEventListener('click', e => {
+                openModal(e.currentTarget)
+            modalSidebarItem.forEach(item => item.classList.remove('active'))
+                item.classList.add('active')
             })
         })
 
@@ -184,10 +215,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const handleModal = (id) => {
-        const modal = document.querySelector('.modal'),
-            modalInputs = [...modal.querySelectorAll('input[type="checkbox"]')],
-            modalNextBtns = [...modal.querySelectorAll('.modal__btn-next')],
-            modalBodys = [...modal.querySelectorAll('.modal__body')],
+      
+      const modalBody = modal.querySelector('.modal__body.active'),
+            modalInputs = [...modalBody.querySelectorAll('input[type="checkbox"]')],
+            modalNextBtns = [...modalBody.querySelectorAll('.modal__btn-next')],
+           
             modalSendRequestBtn = modal.querySelector('.modal__send-request-btn'),
             modalData = {
                 roomId: 1,
@@ -206,23 +238,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let step = 1
 
-        if (id == 1) {
-            modalBodys.map(item => {
-                item.dataset.step == id ? item.classList.add('active') : item.classList.remove('active')
-                modalInputs.forEach(item => {
-                    item.checked = false
-                    const parent = modal.querySelector(`label[for="${item.name}"]`),
-                        img = parent.querySelector('img.checked')
-                    img.classList.remove('show')
-                    img.hidden = true
-                })
-            })
-            const modalPeopleInputs = [...modal.querySelectorAll('.modal__body-people-item')]
+        const modalPeopleInputs = [...modal.querySelectorAll('.modal__body-people-item')]
             modalPeopleInputs.forEach(item => {
                 item.querySelector('input').value = modalData[item.querySelector('input').name]
             })
-        }
-
+           
         modalInputs.forEach(item => {
             item.addEventListener('change', e => {
                 showCheckedImg(e.target.name, modal)
@@ -240,6 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     })
                     modalData['range'] = document.querySelector('.drp-selected').innerHTML
                 }
+                const modalBodys = [...modal.querySelectorAll('.modal__body')]
                 modalBodys.map(item => {
                     item.dataset.step == id ? item.classList.add('active') : item.classList.remove('active')
                 })
