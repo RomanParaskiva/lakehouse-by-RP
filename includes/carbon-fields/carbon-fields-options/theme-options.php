@@ -22,10 +22,5 @@ Container::make( 'theme_options', __( 'Настройки сайта' ) )
     Field::make( 'text', 'site_in_link', 'Ссылка на Инстаграм' ),
     Field::make( 'text', 'site_fb_link', 'Ссылка на FB' ),
     Field::make( 'text', 'site_adress', 'Адрес' ),
- ] )
- 
- ->add_tab('Слайдер на главной', [
-    Field::make( 'media_gallery', 'hero_slider', __( 'Изображения для слайдера' ) )
-    ->set_type([ 'image'] )
  ] );
 

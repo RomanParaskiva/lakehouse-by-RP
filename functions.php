@@ -115,14 +115,14 @@ function register_post_types() {
 		'capability_type'    => 'post',
 		'has_archive'        => true,
 		'menu_position'      => 5,
-		'supports'           => ['title','editor','thumbnail','excerpt']
+		'supports'           => ['title'],
+        'rewrite' => ['slug' => 'rooms']
     ]);
 }
 
 add_action( 'after_setup_theme', 'theme_support');
 
 function theme_support() {
-    register_nav_menus( [
-		'header_menu' => 'Меню'
-	] );
+    register_nav_menu('header_menu', 'Меню' );
+    add_theme_support('post-thumbnails');
 }
